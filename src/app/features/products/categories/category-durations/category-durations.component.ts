@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Colors } from '@common/Colors';
 import { PluCatDur } from '@common/models';
 import { map, tap } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
+
+const typeDetailsIndex = 0;
 
 @Component({
   selector: 'category-durations',
@@ -14,9 +16,23 @@ export class CategoryDurationsComponent implements OnInit {
   @Input() plu: string = 'init-plu';
   @Input() durations: any;
   @Input() category: any;
-  // @Output() currentDuration = new EventEmitter();
 
   durationsForm: FormGroup;
+
+  durations$ = this.productService.products$.pipe(
+    map((products) => {
+      let pluCats = products.find(({ plu }) => plu === this.plu)?.categories;
+      let details = pluCats?.find(
+        (x) => x.categoryName === this.category.categoryName
+      )?.insuranceDetails
+
+      // TODO: TEN_TIMES only!!!
+      let _insurances = !!details ? details[typeDetailsIndex].insurances : undefined;
+      let durations = _insurances?.map(i => i.duration)
+      console.log('[durations$]', durations);
+      return durations
+    })
+  );
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.durationsForm = this.fb.group({
@@ -30,6 +46,8 @@ export class CategoryDurationsComponent implements OnInit {
           currentDuration: change.durations,
         },
       };
+      console.log('[pluCatDur]', pluCatDur);
+
       this.productService.setProductDuration(pluCatDur);
     });
   }
@@ -38,7 +56,11 @@ export class CategoryDurationsComponent implements OnInit {
     const toSelect = this.durations.insuranceDetails[0].insurances.map(
       (i: any) => i.duration
     )[0];
-    console.log('%c[//TODO: durations | toSelect]', Colors.BIGBIG_BLUE, toSelect);
+    console.log(
+      '%c[//TODO: durations | toSelect]',
+      Colors.BIGBIG_BLUE,
+      toSelect
+    );
     this.durationsForm.get('durations')?.setValue(toSelect);
   }
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Colors } from '@common/Colors';
 import { mockProducts } from '@common/_mocks/mockProducts';
 import { CatDur, PluCatDur, PluCats, Product } from '@common/models';
 import { BehaviorSubject, map, Observable, of, shareReplay, tap } from 'rxjs';
@@ -17,6 +16,7 @@ export class ProductService {
   private _productsStateSubj = new BehaviorSubject<PluCats[]>(
     this.productState
   );
+
   productsState$: Observable<PluCats[]> =
     this._productsStateSubj.asObservable();
 
@@ -36,10 +36,12 @@ export class ProductService {
           ...p,
           categories: p.categories.map((c) => ({
             ...c,
-            insuranceDetails: c.insuranceDetails.map((det) => ({
-              type: det.insurances.map((_) => det.type)[DEFAULT_TYPE_ID],
-              insurances: det.insurances,
-            })),
+            insuranceDetails: c.insuranceDetails.map(
+              ({ insurances, type }) => ({
+                type: insurances.map((_) => type)[DEFAULT_TYPE_ID],
+                insurances: insurances,
+              })
+            ),
           })),
         }))
       ),
@@ -51,7 +53,7 @@ export class ProductService {
               categoryName,
               currentDuration: insuranceDetails.map(
                 (det) => det.insurances.map((ins) => ins.duration)[0]
-              ),
+              )[0],
             })
           );
           return {

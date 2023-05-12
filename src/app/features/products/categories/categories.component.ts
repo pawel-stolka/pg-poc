@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Colors } from '@common/Colors';
-import { Category, PluCatDur, Product } from '@common/models';
-import { Observable, delay, map, of, tap } from 'rxjs';
+import { Category } from '@common/models';
+import { Observable, delay, map, of } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 
