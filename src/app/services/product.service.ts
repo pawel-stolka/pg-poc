@@ -22,7 +22,9 @@ export class ProductService {
     this._productsStateSubj.asObservable();
 
   constructor() {
-    this.products$ = this.getProducts$();
+    this.products$ = this.getProducts$().pipe(
+      tap(p => console.log('products$ | SERVICE', p))
+    )
   }
 
   setProductDuration(pluCatDur: PluCatDur) {
@@ -30,7 +32,6 @@ export class ProductService {
   }
 
   getProducts$(): Observable<Product[]> {
-
     return of(products).pipe(
       map((products) =>
         products.map((p) => ({
@@ -46,7 +47,7 @@ export class ProductService {
           })),
         }))
       ),
-      shareReplay(),
+      // shareReplay(),
       tap((products) => {
         let pluCats: PluCats[] = products.map(({ plu, categories }) => {
           let catDurs: CatDur[] | any[] = categories.map(

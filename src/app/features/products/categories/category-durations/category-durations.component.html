@@ -5,11 +5,12 @@
   </div>
 </div>
 
+<!-- <pre>{{ selectorDurations$ | async | json }}</pre> -->
 <div *ngIf="selectorDurations$ | async as selectorDurations">
-  <!-- <div class="h2">
+  <div class="h2">
     <div class="h">//selectorDurations:</div>
     <pre>{{ selectorDurations | json }}</pre>
-  </div> -->
+  </div>
   <form [formGroup]="durationsForm">
     <mat-form-field class="full-width">
       <mat-select placeholder="durations" formControlName="durations">
