@@ -1,0 +1,19 @@
+<h2>products</h2>
+
+<div class="container">
+  <ng-container *ngIf="products$ | async as products">
+    <!-- <pre>{{ products | json }}</pre> -->
+
+    <mat-card *ngFor="let product of products">
+      <mat-card-title>{{ product.plu }}</mat-card-title>
+      <mat-card-content>
+        <benefits [benefits]="product.benefits"></benefits>
+        <div class="divider"></div>
+        <categories
+          [categories]="product.categories"
+          [plu]="product.plu"
+        ></categories>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>
