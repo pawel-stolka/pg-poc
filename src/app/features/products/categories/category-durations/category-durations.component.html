@@ -1,13 +1,13 @@
-<div class="h">//durations:</div>
-<div *ngIf="durations$ | async as durs">
+<div class="h">//selectorDurations:</div>
+<div *ngIf="selectorDurations$ | async as selectorDurations">
   <div class="h2">
-    <pre>{{ durs | json }}</pre>
+    <pre>{{ selectorDurations | json }}</pre>
   </div>
   <form [formGroup]="durationsForm">
     <mat-form-field class="full-width">
       <mat-select placeholder="durations" formControlName="durations">
         <mat-option
-        *ngFor="let duration of durs"
+        *ngFor="let duration of selectorDurations"
         [value]="duration"
       >
         {{ duration }}

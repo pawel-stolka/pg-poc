@@ -19,7 +19,7 @@ export class CategoryDurationsComponent implements OnInit {
 
   durationsForm: FormGroup;
 
-  durations$ = this.productService.products$.pipe(
+  selectorDurations$ = this.productService.products$.pipe(
     map((products) => {
       let pluCats = products.find(({ plu }) => plu === this.plu)?.categories;
       let details = pluCats?.find(
@@ -29,7 +29,7 @@ export class CategoryDurationsComponent implements OnInit {
       // TODO: TEN_TIMES only!!!
       let _insurances = !!details ? details[typeDetailsIndex].insurances : undefined;
       let durations = _insurances?.map(i => i.duration)
-      console.log('[durations$]', durations);
+      console.log('[selectorDurations$]', durations);
       return durations
     })
   );
@@ -46,8 +46,6 @@ export class CategoryDurationsComponent implements OnInit {
           currentDuration: change.durations,
         },
       };
-      console.log('[pluCatDur]', pluCatDur);
-
       this.productService.setProductDuration(pluCatDur);
     });
   }
