@@ -17,6 +17,7 @@ export class ProductService {
   private _productsStateSubj = new BehaviorSubject<PluCats[]>(
     this.productState
   );
+
   productsState$: Observable<PluCats[]> =
     this._productsStateSubj.asObservable();
 
@@ -65,11 +66,11 @@ export class ProductService {
   }
 
   setInitialDurations(pluCats: PluCats[]) {
-    pluCats.forEach((pluCat, i) => {
-      pluCat.categories.forEach((category, j) => {
+    pluCats.forEach((pluCat) => {
+      pluCat.categories.forEach((category) => {
         let pluCatDur: PluCatDur = {
           plu: pluCat.plu,
-          category: category,
+          category,
         };
         this.changeState(pluCatDur);
       });
@@ -87,9 +88,7 @@ export class ProductService {
   }
 
   private addPluToState(change: PluCatDur) {
-    let otherPlus = this.productState.filter(
-      (state) => state.plu !== change.plu
-    );
+    let otherPlus = this.productState.filter(({ plu }) => plu !== change.plu);
 
     let currentChange: PluCats = {
       plu: change.plu,
@@ -103,7 +102,9 @@ export class ProductService {
     let stateForPlu = this.productState.find(({ plu }) => plu === change.plu);
 
     let stateForPluCategories = stateForPlu?.categories ?? [];
-    let pluCategoryNames = stateForPluCategories.map((x) => x.categoryName);
+    let pluCategoryNames = stateForPluCategories.map(
+      ({ categoryName }) => categoryName
+    );
     let stateForPlu_hasCategory = pluCategoryNames?.includes(
       change.category.categoryName
     );
@@ -115,9 +116,7 @@ export class ProductService {
         plu: change.plu,
         categories: [...stateForPluCategories, change.category],
       };
-      let otherPlus = this.productState.filter(
-        (state) => state.plu !== change.plu
-      );
+      let otherPlus = this.productState.filter(({ plu }) => plu !== change.plu);
       this.productState = [...otherPlus, pluUpdate];
       this._productsStateSubj.next(this.productState);
     }

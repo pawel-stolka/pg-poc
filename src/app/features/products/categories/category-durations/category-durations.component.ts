@@ -16,12 +16,11 @@ export class CategoryDurationsComponent implements OnInit {
   @Input() category: any;
   // @Output() currentDuration = new EventEmitter();
 
-  durationsForm: FormGroup;
+  durationsForm: FormGroup  = this.fb.group({
+    durations: [null, Validators.required],
+  });
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
-    this.durationsForm = this.fb.group({
-      durations: [null, Validators.required],
-    });
     this.durationsForm.valueChanges.subscribe((change) => {
       let pluCatDur: PluCatDur = {
         plu: this.plu,
@@ -35,10 +34,10 @@ export class CategoryDurationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const toSelect = this.durations.insuranceDetails[0].insurances.map(
-      (i: any) => i.duration
-    )[0];
-    console.log('%c[//TODO: durations | toSelect]', Colors.BIGBIG_BLUE, toSelect);
-    this.durationsForm.get('durations')?.setValue(toSelect);
+    // const toSelect = this.durations.insuranceDetails[0].insurances.map(
+    //   (i: any) => i.duration
+    // )[0];
+    // console.log('%c[//TODO: durations | toSelect]', Colors.BIGBIG_BLUE, toSelect);
+    // this.durationsForm.get('durations')?.setValue(toSelect);
   }
 }
