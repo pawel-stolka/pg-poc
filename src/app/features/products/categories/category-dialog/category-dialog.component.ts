@@ -15,9 +15,13 @@ export interface CategoryData {
 })
 export class CategoryDialogComponent {
   productsState$ = this.productService.productsState$;
-  pluState$ = this.productService.productsState$.pipe(
-    map(state => state.find(({plu }) => plu === this.data?.plu))
-  )
+  durationState$ = this.productService.productsState$.pipe(
+    map((state) => state.find(({ plu }) => plu === this.data?.plu)),
+    map((pluCats) =>
+      pluCats?.categories.find((c) => c.categoryName === this.data.categoryName)
+    ),
+    map((category) => category?.currentDuration)
+  );
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: CategoryData | DialogData | any,

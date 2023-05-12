@@ -4,6 +4,7 @@ import { CatDur, PluCatDur, PluCats, Product } from '@common/models';
 import { BehaviorSubject, map, Observable, of, shareReplay, tap } from 'rxjs';
 
 const products: Product[] = mockProducts;
+const DEFAULT_TYPE_ID = 0;
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,7 @@ export class ProductService {
   }
 
   getProducts$(): Observable<Product[]> {
-    let DEFAULT_TYPE_ID = 0;
+
     return of(products).pipe(
       map((products) =>
         products.map((p) => ({
@@ -67,11 +68,11 @@ export class ProductService {
   }
 
   setInitialDurations(pluCats: PluCats[]) {
-    pluCats.forEach((pluCat, i) => {
-      pluCat.categories.forEach((category, j) => {
+    pluCats.forEach((pluCat) => {
+      pluCat.categories.forEach((category) => {
         let pluCatDur: PluCatDur = {
           plu: pluCat.plu,
-          category: category,
+          category,
         };
         this.changeState(pluCatDur);
       });

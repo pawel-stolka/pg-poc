@@ -9,15 +9,12 @@
 
       <div class="divider"></div>
 
-      <button mat-raised-button (click)="openDialog()">category dialog</button>
-
-      <div class="divider"></div>
+      
 
       <ng-container *ngIf="categories">
         <!-- <div>cats: <pre>{{ categories | json }}</pre></div> -->
         <category-durations
           [plu]="plu"
-          [durations]="categories[id]"
           [category]="category"
         ></category-durations>
       </ng-container>

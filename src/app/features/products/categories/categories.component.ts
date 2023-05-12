@@ -27,18 +27,18 @@ export class CategoriesComponent {
 
   payments$: Observable<any[]>;
 
-  openDialog() {
-    this.dialog.open(CategoryDialogComponent, {
-      data: {
-        plu: this.plu
-      },
-    });
-  }
+  // openDialog() {
+  //   this.dialog.open(CategoryDialogComponent, {
+  //     data: {
+  //       plu: this.plu
+  //     },
+  //   });
+  // }
 
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
-    public dialog: MatDialog
+    // public dialog: MatDialog
   ) {
     this.productsForm = this.fb.group({
       products: [null, Validators.required],

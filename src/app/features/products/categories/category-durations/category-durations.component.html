@@ -1,17 +1,24 @@
-<div class="h">//selectorDurations:</div>
-<div *ngIf="selectorDurations$ | async as selectorDurations">
+<div class="h">//currentDuration:</div>
+<div *ngIf="currentDuration$ | async as currentDuration">
   <div class="h2">
-    <pre>{{ selectorDurations | json }}</pre>
+    <pre>{{ currentDuration | json }}</pre>
   </div>
+</div>
+
+<div *ngIf="selectorDurations$ | async as selectorDurations">
+  <!-- <div class="h2">
+    <div class="h">//selectorDurations:</div>
+    <pre>{{ selectorDurations | json }}</pre>
+  </div> -->
   <form [formGroup]="durationsForm">
     <mat-form-field class="full-width">
       <mat-select placeholder="durations" formControlName="durations">
         <mat-option
-        *ngFor="let duration of selectorDurations"
-        [value]="duration"
-      >
-        {{ duration }}
-      </mat-option>
+          *ngFor="let duration of selectorDurations"
+          [value]="duration"
+        >
+          {{ duration }}
+        </mat-option>
         <!-- <mat-option
           *ngFor="let duration of durations.insuranceDetails[0].insurances"
           [value]="duration.duration"
@@ -22,3 +29,8 @@
     </mat-form-field>
   </form>
 </div>
+
+<div class="divider"></div>
+
+<button mat-raised-button (click)="openDialog()">category dialog</button>
+

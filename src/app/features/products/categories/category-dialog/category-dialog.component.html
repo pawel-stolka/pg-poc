@@ -2,6 +2,10 @@
   {{ productsState | json}}
 </ng-container> -->
 
-<ng-container *ngIf="pluState$ | async as pluState">
-  <pre>{{ pluState | json}}</pre>
+<div class="h">
+  {{ data | json }}
+</div>
+
+<ng-container *ngIf="durationState$ | async as durationState">
+  <div class="h2">durationState: {{ durationState }}</div>
 </ng-container>
