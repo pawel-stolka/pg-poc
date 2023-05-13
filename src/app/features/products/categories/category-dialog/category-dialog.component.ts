@@ -7,6 +7,7 @@ import { ProductService } from 'src/app/services/product.service';
 export interface CategoryData {
   plu: any;
   categoryName: any;
+  selectorDurations?: any
 }
 
 @Component({

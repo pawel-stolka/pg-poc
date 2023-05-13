@@ -89,11 +89,11 @@ export const mockProducts: Product[] = [
     benefits: mockBenefits[0],
     categories: mockCategories(0),
   },
-  // {
-  //   plu: 'plu-2',
-  //   benefits: mockBenefits[1],
-  //   categories: mockCategories(1),
-  // },
+  {
+    plu: 'plu-2',
+    benefits: mockBenefits[1],
+    categories: mockCategories(1),
+  },
   // {
   //   plu: 'plu-3',
   //   benefits: mockBenefits[1],

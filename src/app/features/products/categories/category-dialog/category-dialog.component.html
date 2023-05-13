@@ -2,12 +2,17 @@
   {{ productsState | json}}
 </ng-container> -->
 
-<div class="h">
-  {{ data | json }}
-</div>
+<div class="h">data: {{ data | json }}</div>
 
-<ng-container *ngIf="durationState$ | async as durationState">
+<dropdown
+  [selectorDurations]="data.selectorDurations"
+  [plu]="data.plu"
+  [categoryName]="data.categoryName"
+></dropdown>
+<!-- <dropdown [selectorDurations]="data.selectorDurations"></dropdown> -->
+
+<!-- <ng-container *ngIf="durationState$ | async as durationState">
   <div class="h2">durationState: {{ durationState | json }}</div>
 </ng-container>
 
-<category-durations [plu]="data.plu" [category]="data.categoryName"></category-durations>
+<category-durations [plu]="data.plu" [category]="data.categoryName"></category-durations> -->

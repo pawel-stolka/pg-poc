@@ -22,15 +22,11 @@ export class CategoryDurationsComponent implements OnInit {
   durationsForm: FormGroup;
 
   durations = {
-    insuranceDetails: [
-      {insurances: [
-        {duration: 1 },
-        {duration: 2 },
-      ]}
-    ]
-  }
+    insuranceDetails: [{ insurances: [{ duration: 1 }, { duration: 2 }] }],
+  };
 
-
+  selectorDurations: any;
+  currentDuration: any;
 
   // currentDuration: string | undefined;
 
@@ -40,9 +36,17 @@ export class CategoryDurationsComponent implements OnInit {
     map((categories) =>
       categories?.find((x) => x.categoryName === this.category.categoryName)
     ),
-    map((category) => category?.currentDuration)
+    map((category) => category?.currentDuration),
     // tap(currentDuration => this.currentDuration = currentDuration)
     // map(categories => categories?.map(x => x.currentDuration))
+    // tap((currentDuration) => {
+    //   console.log(
+    //     '%c[BIGBIG_RED: [setValue] in category-durations]',
+    //     Colors.BIGBIG_RED,
+    //     currentDuration
+    //   );
+    //   this.durationsForm.get('durations')?.setValue(currentDuration);
+    // })
   );
   selectorDurations$: Observable<any>;
 
@@ -58,18 +62,25 @@ export class CategoryDurationsComponent implements OnInit {
       // tap(p => console.log('selectorDurations$ | category-durations', p)),
       map((products) => {
         let pluCats = products.find(({ plu }) => plu === this.plu)?.categories;
-        console.log('1.selectorDurations$ | pluCats', pluCats, this.category)
+        console.log('1.selectorDurations$ | pluCats', pluCats, this.category);
         let _details = pluCats?.find(
           (x) => x.categoryName === this.category.categoryName
-        )
+        );
         let insuranceDetail = _details?.insuranceDetails[0];
-        let insurances = insuranceDetail?.insurances?.map((i: any) => i.duration);
-        console.log('2.selectorDurations$ | _details', _details)
-        console.log('3.selectorDurations$ | _details', insuranceDetail, insurances)
-        return insurances
+        let insurances = insuranceDetail?.insurances?.map(
+          (i: any) => i.duration
+        );
+        console.log('2.selectorDurations$ | _details', _details);
+        console.log(
+          '3.selectorDurations$ | _details',
+          insuranceDetail,
+          insurances
+        );
+        return insurances;
       }),
-      tap(durations => console.log('durations | TAP', durations)
-      )
+      tap((durations) => console.log('durations | TAP', durations)),
+      tap((durations) => (this.selectorDurations = durations))
+      // tap(durations => this.currentDuration = durations),
     );
 
     this.durationsForm.valueChanges.subscribe((change) => {
@@ -89,20 +100,26 @@ export class CategoryDurationsComponent implements OnInit {
     //   (i: any) => i.duration
     // )[0];
     let toSelect;
-    this.currentDuration$.subscribe((x) => (toSelect = x));
-    console.log(
-      '%c[//TODO: durations | toSelect]',
-      Colors.BIGBIG_BLUE,
-      toSelect
-    );
-    this.durationsForm.get('durations')?.setValue(toSelect);
+    // this.currentDuration$.subscribe((x) => {
+    //   console.log(
+    //     '%c[BIGBIG_RED: [currentDuration$] in category-durations]',
+    //     Colors.BIGBIG_RED,
+    //     x
+    //   );
+    //   this.durationsForm.get('durations')?.setValue(x);
+    // });
   }
 
   openDialog() {
+    let currDur = this.durationsForm.get('durations')?.value;
+    console.log('[this.openDialog]', currDur);
+
     this.dialog.open(CategoryDialogComponent, {
       data: {
         plu: this.plu,
-        categoryName: this.category.categoryName
+        categoryName: this.category.categoryName,
+        currDur,
+        selectorDurations: this.selectorDurations,
       },
     });
   }

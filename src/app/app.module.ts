@@ -21,6 +21,7 @@ import { CategoryPaymentsComponent } from './features/products/categories/catego
 import { StateComponent } from './common/state/state.component';
 import { Dialog2Component } from './features/home/dialog2/dialog2.component';
 import { CategoryDialogComponent } from './features/products/categories/category-dialog/category-dialog.component';
+import { DropdownComponent } from './features/products/categories/category-dialog/dropdown/dropdown.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -45,6 +46,7 @@ export const routes: Routes = [
     StateComponent,
     Dialog2Component,
     CategoryDialogComponent,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,
