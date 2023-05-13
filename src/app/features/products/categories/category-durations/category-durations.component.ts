@@ -67,21 +67,6 @@ export class CategoryDurationsComponent implements OnInit {
         console.log('2.selectorDurations$ | _details', _details)
         console.log('3.selectorDurations$ | _details', insuranceDetail, insurances)
         return insurances
-        // console.log('3b.selectorDurations$ | _details', insuranceDetail?.insurances)
-        // console.log('3c.selectorDurations$ | insurances', insurances)
-        // let details = _details
-        // TODO: TEN_TIMES only!!!
-        // let _insurances = !!details
-        //   ? details[typeDetailsIndex].insurances
-        //   : undefined;
-        // let _insurances = details
-        //   ? details.insurances
-        //   : undefined;
-        console.log('[4.selectorDurations$ | _insurances]', '_insurances');
-        let _insurances = _details;//?.insurances
-        // let durations = _insurances?.map((i: any) => i.duration);
-        // console.log('[5.selectorDurations$]', durations);
-        // return durations;
       }),
       tap(durations => console.log('durations | TAP', durations)
       )
