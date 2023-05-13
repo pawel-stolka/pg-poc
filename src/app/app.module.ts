@@ -22,6 +22,7 @@ import { StateComponent } from './common/state/state.component';
 import { Dialog2Component } from './features/home/dialog2/dialog2.component';
 import { CategoryDialogComponent } from './features/products/categories/category-dialog/category-dialog.component';
 import { DropdownComponent } from './features/products/categories/category-dialog/dropdown/dropdown.component';
+import { CatDursComponent } from './features/products/categories/cat-durs/cat-durs.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -47,6 +48,7 @@ export const routes: Routes = [
     Dialog2Component,
     CategoryDialogComponent,
     DropdownComponent,
+    CatDursComponent,
   ],
   imports: [
     BrowserModule,
