@@ -23,26 +23,26 @@ export class DropdownComponent implements OnInit {
       durations: [null, Validators.required],
     });
 
-    let toSelect = '1.21';
-    this.dropdownForm.get('durations')?.setValue(toSelect)
+    // let toSelect = '1.21';
+    // this.dropdownForm.get('durations')?.setValue(toSelect)
 
-    this.dropdownForm.valueChanges.subscribe((dropChange) => {
-      console.log('%c[dropChange]', Colors.BIGBIG_RED, dropChange);
+    // this.dropdownForm.valueChanges.subscribe((dropChange) => {
+    //   console.log('%c[dropChange]', Colors.BIGBIG_RED, dropChange);
 
-      // alert(dropChange.durations)
-      let pluCatDur: PluCatDur = {
-        plu: this.plu,
-        category: {
-          categoryName: this.categoryName,
-          // currentDuration: this.selectorDurations,
-          currentDuration: dropChange.durations,
-          // currentDuration: change.durations,
-        },
-      };
-      console.log('[pluCatDur in dropdown]', pluCatDur);
+    //   // alert(dropChange.durations)
+    //   let pluCatDur: PluCatDur = {
+    //     plu: this.plu,
+    //     category: {
+    //       categoryName: this.categoryName,
+    //       // currentDuration: this.selectorDurations,
+    //       currentDuration: dropChange.durations,
+    //       // currentDuration: change.durations,
+    //     },
+    //   };
+    //   console.log('[pluCatDur in dropdown]', pluCatDur);
 
-      this.productService.setProductDuration(pluCatDur);
-    });
+    //   this.productService.setProductDuration(pluCatDur);
+    // });
   }
 
   ngOnInit() {

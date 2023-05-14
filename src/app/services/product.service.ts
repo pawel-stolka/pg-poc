@@ -47,7 +47,7 @@ export class ProductService {
           })),
         }))
       ),
-      // shareReplay(),
+
       tap((products) => {
         let pluCats: PluCats[] = products.map(({ plu, categories }) => {
           let catDurs: CatDur[] | any[] = categories.map(
@@ -64,7 +64,8 @@ export class ProductService {
           };
         });
         this.setInitialDurations(pluCats);
-      })
+      }),
+      shareReplay(),
     );
   }
 
@@ -75,6 +76,8 @@ export class ProductService {
           plu: pluCat.plu,
           category,
         };
+        console.log('[setInitialDurations]', pluCatDur);
+
         this.changeState(pluCatDur);
       });
     });

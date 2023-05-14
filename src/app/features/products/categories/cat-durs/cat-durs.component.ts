@@ -83,7 +83,7 @@ export class CatDursComponent implements OnInit {
       tap((currentDuration) => {
         this.durationsForm.get('durations')?.setValue(currentDuration);
         console.log(
-          '[TAP | currentDuration]',
+          '[setValue | cat-durs | currentDuration]',
           // this.durationsForm.get('durations')?.value,
           currentDuration
         );
