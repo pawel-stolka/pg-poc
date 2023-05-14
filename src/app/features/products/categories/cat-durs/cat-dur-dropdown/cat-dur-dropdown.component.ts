@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, map, tap } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { TEN_TIMES } from '../cat-durs.component';
+import { PluCatDur } from '@common/models';
 
 @Component({
   selector: 'cat-dur-dropdown',
@@ -26,6 +27,19 @@ export class CatDurDropdownComponent implements OnInit {
     this.dropForm = this.fb.group({
       durations: [null, Validators.required],
     });
+
+    this.dropForm.valueChanges.subscribe(catDurDropChange => {
+      console.log('[catDurDropChange]', catDurDropChange);
+      let pluCatDur: PluCatDur = {
+        plu: this.plu,
+        category: {
+          categoryName: this.categoryName,
+          currentDuration: catDurDropChange.durations,
+        },
+      };
+      console.log('[catDurDropdown change]', pluCatDur);
+      this.productService.setProductDuration(pluCatDur);
+    })
 
     this.selectorDurations$ = this.productService.products$.pipe(
       tap(sd => console.log('selectorDurations$ | cat-dur-dropdown', sd)),
@@ -59,14 +73,14 @@ export class CatDurDropdownComponent implements OnInit {
         categories?.find((x) => x.categoryName === this.categoryName)
       ),
       map((category) => category?.currentDuration),
-      // tap((currentDuration) => {
-      //   this.dropForm.get('durations')?.setValue(currentDuration);
-      //   console.log(
-      //     '[TAP | currentDuration]',
-      //     // this.durationsForm.get('durations')?.value,
-      //     currentDuration
-      //   );
-      // })
+      tap((currentDuration) => {
+        this.dropForm.get('durations')?.setValue(currentDuration);
+        console.log(
+          '[TAP | currentDuration]',
+          // this.durationsForm.get('durations')?.value,
+          currentDuration
+        );
+      })
     );
 
   }

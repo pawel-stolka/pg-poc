@@ -40,9 +40,7 @@ export class CatDursComponent implements OnInit {
         plu: this.plu,
         category: {
           categoryName: this.category.categoryName,
-          // currentDuration: this.selectorDurations,
           currentDuration: dropChange.durations,
-          // currentDuration: change.durations,
         },
       };
       console.log('[pluCatDur in dropdown]', pluCatDur);
@@ -117,7 +115,7 @@ export class CatDursComponent implements OnInit {
     let currDur = this.durationsForm.get('durations')?.value;
     // console.log('[this.openDialog]', currDur);
 
-    this.dialog.open(CatDurDialogComponent, {
+    let dialogRef = this.dialog.open(CatDurDialogComponent, {
       data: {
         plu: this.plu,
         categoryName: this.category.categoryName,
@@ -125,10 +123,16 @@ export class CatDursComponent implements OnInit {
         // selectorDurations: this.selectorDurations,
       },
     });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`CatDurDialog close result`, result);
+    });
+
+    // dialogRef.close('Pizza!');
   }
 
   ngOnInit(): void {
-    this.currentDuration$.subscribe()
+    this.currentDuration$.subscribe();
     // NOT NEEDED -> currentDuration$
     // this.finDuration$
     //   // this.currentDuration$
