@@ -1,0 +1,27 @@
+<!-- <div *ngIf="finDuration$ | async as finDuration">
+  <div class="h3">
+    cat-durs.finDuration$: {{ finDuration | json }}
+  </div>
+</div> -->
+<div *ngIf="selectorDurations$ | async as selectorDurations">
+  <!-- <div class="h2">
+    <div class="h">cat-durs.selectorDurations$:</div>
+    <pre>{{ selectorDurations | json }}</pre>
+  </div>
+
+  <div class="h2">
+    <div class="h">cat-durs.category</div>
+    <div class="h3">{{ category | json }}</div>
+  </div> -->
+
+
+  <form [formGroup]="durationsForm">
+    <mat-form-field class="full-width">
+      <mat-select placeholder="cat-durs works" formControlName="durations">
+        <mat-option *ngFor="let duration of selectorDurations" [value]="duration">
+          {{ duration }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>

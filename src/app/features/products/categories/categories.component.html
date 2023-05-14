@@ -9,14 +9,28 @@
 
       <div class="divider"></div>
 
-      
+      <!-- TODO: inside currentDuration$ -->
+      <ng-container *ngIf="currentCats$ | async as currentCats">
+        <!-- <div>categories.currentCats:
+          <pre class="h">{{ currentCats | json }}</pre>
+        </div>
+        <div>categories.category
+          <div class="h3">category: {{ category | json }}</div>
+        </div> -->
+        <cat-durs
+        [plu]="plu"
+        [category]="category"
+        ></cat-durs>
+        <!-- [currentCategories]="currentCats"
+        [currentDurations]="currentDurations" -->
+      </ng-container>
 
       <ng-container *ngIf="categories">
         <!-- <div>cats: <pre>{{ categories | json }}</pre></div> -->
-        <category-durations
+        <!-- <category-durations
           [plu]="plu"
           [category]="category"
-        ></category-durations>
+        ></category-durations> -->
       </ng-container>
 
       <ng-container *ngIf="payments$ | async as payments"> </ng-container>

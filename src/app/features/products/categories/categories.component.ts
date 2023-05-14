@@ -23,9 +23,10 @@ export class CategoriesComponent {
   durationsForm: FormGroup = this.fb.group({
     durations: [null, Validators.required],
   });
-  currentDuration: any;
+  currentDurations: any;
 
   payments$: Observable<any[]>;
+  currentCats$
 
   // openDialog() {
   //   this.dialog.open(CategoryDialogComponent, {
@@ -56,6 +57,14 @@ export class CategoriesComponent {
       map((x: any) => x.map((v: any) => v.insuranceDetails))
     );
 
+    this.currentCats$ = this.productService.productsState$.pipe(
+      map((state) => state.find((x) => x.plu === this.plu)),
+      map((pluCats) => pluCats?.categories),
+      // map((categories) =>
+      //   categories?.find((x) => x.categoryName === this.category.categoryName)
+      // ),
+      // map((category) => category?.s),
+    )
 
   }
 }
