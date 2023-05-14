@@ -11,11 +11,10 @@ import { NavComponent } from './features/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { ProductsComponent } from './features/products/products.component';
-import { WeatherWidgetComponent } from './features/weather-widget/weather-widget.component';
 import { CategoriesComponent } from './features/products/categories/categories.component';
 import { BenefitsComponent } from './features/products/benefits/benefits.component';
 import { CategoryDetailComponent } from './features/products/categories/category-detail/category-detail.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CategoryDurationsComponent } from './features/products/categories/category-durations/category-durations.component';
 import { CategoryPaymentsComponent } from './features/products/categories/category-payments/category-payments.component';
 import { StateComponent } from './common/state/state.component';
@@ -36,7 +35,6 @@ export const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    WeatherWidgetComponent,
     HomeComponent,
     ProductsComponent,
     ProductDetailsComponent,
@@ -59,7 +57,7 @@ export const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [WidgetState, WidgetActions],
   bootstrap: [AppComponent],

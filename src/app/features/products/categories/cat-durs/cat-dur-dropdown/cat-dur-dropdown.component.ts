@@ -29,7 +29,7 @@ export class CatDurDropdownComponent implements OnInit {
     });
 
     this.dropForm.valueChanges.subscribe(catDurDropChange => {
-      console.log('[catDurDropChange]', catDurDropChange);
+
       let pluCatDur: PluCatDur = {
         plu: this.plu,
         category: {
@@ -37,30 +37,24 @@ export class CatDurDropdownComponent implements OnInit {
           currentDuration: catDurDropChange.durations,
         },
       };
-      console.log('[catDurDropdown change]', pluCatDur);
+      // console.log('[cat-dur-dropdown]', catDurDropChange);
+      // console.log('[cat-dur-dropdown #2]', pluCatDur);
+      // this.productService.changeState(pluCatDur)
       this.productService.setProductDuration(pluCatDur);
     })
 
     this.selectorDurations$ = this.productService.products$.pipe(
-      tap(sd => console.log('selectorDurations$ | cat-dur-dropdown', sd)),
       map((products) => {
         let pluCats = products.find(({ plu }) => plu === this.plu)?.categories;
-        let _details = pluCats?.find(
+        let details = pluCats?.find(
           ({ categoryName }) => categoryName === this.categoryName
-        );
+        )?.insuranceDetails;
 
-        let insurances = _details?.insuranceDetails.find(
+        return details?.find(
           ({ type }) => type === TEN_TIMES
         )?.insurances;
-        // console.log('[insurances]', insurances);
-        let durations = insurances?.map(({ duration }) => duration);
-        console.log(
-          `[durations] ${this.plu} | ${this.categoryName}`,
-          durations
-        );
-
-        return durations;
-      })
+      }),
+      map(insurances => insurances?.map(({ duration }) => duration))
       // tap(durations => {
       //   this.selectedDuration = durations;
       // })
@@ -75,11 +69,11 @@ export class CatDurDropdownComponent implements OnInit {
       map((category) => category?.currentDuration),
       tap((currentDuration) => {
         this.dropForm.get('durations')?.setValue(currentDuration);
-        console.log(
-          '[TAP | currentDuration]',
-          // this.durationsForm.get('durations')?.value,
-          currentDuration
-        );
+        // console.log(
+        //   '[TAP | currentDuration]',
+        //   // this.durationsForm.get('durations')?.value,
+        //   currentDuration
+        // );
       })
     );
 

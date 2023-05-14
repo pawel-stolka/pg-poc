@@ -23,8 +23,8 @@ export class ProductService {
 
   constructor() {
     this.products$ = this.getProducts$().pipe(
-      tap(p => console.log('products$ | SERVICE', p))
-    )
+      // tap((p) => console.log('products$ | SERVICE', p))
+    );
   }
 
   setProductDuration(pluCatDur: PluCatDur) {
@@ -65,7 +65,7 @@ export class ProductService {
         });
         this.setInitialDurations(pluCats);
       }),
-      shareReplay(),
+      shareReplay()
     );
   }
 
@@ -76,7 +76,7 @@ export class ProductService {
           plu: pluCat.plu,
           category,
         };
-        console.log('[setInitialDurations]', pluCatDur);
+        // console.log('[setInitialDurations]', pluCatDur);
 
         this.changeState(pluCatDur);
       });
@@ -84,6 +84,7 @@ export class ProductService {
   }
 
   changeState(change: PluCatDur) {
+    console.log('[changeState]', change);
     let pluInState = !!this.productState.find(({ plu }) => plu === change.plu);
 
     if (!pluInState) {
@@ -126,11 +127,13 @@ export class ProductService {
         (state) => state.plu !== change.plu
       );
       this.productState = [...otherPlus, pluUpdate];
+
       this._productsStateSubj.next(this.productState);
     }
   }
 
   private changeDuration(change: PluCatDur) {
+    // console.log('[CHANGE changeDuration]', change);
     this.productState = this.productState.map((pluCats: PluCats) => {
       if (pluCats.plu !== change.plu) {
         return pluCats;
@@ -150,7 +153,7 @@ export class ProductService {
         }),
       };
     });
-
+    console.log('[CHANGE changeDuration => ]', this.productState);
     this._productsStateSubj.next(this.productState);
   }
 }

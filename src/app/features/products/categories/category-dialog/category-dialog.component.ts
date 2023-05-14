@@ -19,7 +19,6 @@ export class CategoryDialogComponent {
   productsState$ = this.productService.productsState$;
   durationState$ = this.productService.productsState$.pipe(
     map((state) => state.find(({ plu }) => plu === this.data?.plu)),
-    tap(x => console.log('TAP', this.data)),
     map((pluCats) =>
       pluCats?.categories.find((c) => c.categoryName === this.data.categoryName)
     ),

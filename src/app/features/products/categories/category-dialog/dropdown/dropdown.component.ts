@@ -26,8 +26,8 @@ export class DropdownComponent implements OnInit {
     // let toSelect = '1.21';
     // this.dropdownForm.get('durations')?.setValue(toSelect)
 
-    // this.dropdownForm.valueChanges.subscribe((dropChange) => {
-    //   console.log('%c[dropChange]', Colors.BIGBIG_RED, dropChange);
+    this.dropdownForm.valueChanges.subscribe((dropChange) => {
+      console.log('%c[dropChange]', Colors.BIGBIG_RED, dropChange);
 
     //   // alert(dropChange.durations)
     //   let pluCatDur: PluCatDur = {
@@ -42,7 +42,7 @@ export class DropdownComponent implements OnInit {
     //   console.log('[pluCatDur in dropdown]', pluCatDur);
 
     //   this.productService.setProductDuration(pluCatDur);
-    // });
+    });
   }
 
   ngOnInit() {

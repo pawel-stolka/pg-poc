@@ -35,7 +35,6 @@ export class CatDursComponent implements OnInit {
     });
 
     this.durationsForm.valueChanges.subscribe((dropChange) => {
-      console.log('%c[dropChange]', Colors.BIGBIG_RED, dropChange);
       let pluCatDur: PluCatDur = {
         plu: this.plu,
         category: {
@@ -48,7 +47,6 @@ export class CatDursComponent implements OnInit {
     });
 
     this.selectorDurations$ = this.productService.products$.pipe(
-      // tap(p => console.log('selectorDurations$ | category-durations', p)),
       map((products) => {
         let pluCats = products.find(({ plu }) => plu === this.plu)?.categories;
         let _details = pluCats?.find(
@@ -60,10 +58,10 @@ export class CatDursComponent implements OnInit {
         )?.insurances;
         // console.log('[insurances]', insurances);
         let durations = insurances?.map(({ duration }) => duration);
-        console.log(
-          `[durations] ${this.plu} | ${this.category.categoryName}`,
-          durations
-        );
+        // console.log(
+        //   `[durations] ${this.plu} | ${this.category.categoryName}`,
+        //   durations
+        // );
 
         return durations;
       })
@@ -87,70 +85,22 @@ export class CatDursComponent implements OnInit {
         );
       })
     );
-
-    // this.finDuration$ = combineLatest([
-    //   this.selectorDurations$,
-    //   currentDuration$,
-    // ]).pipe(
-    //   map(([selectorDurations, currentDuration]) => {
-    //     // let res = selectorDurations;
-    //     let res = currentDuration;
-    //     // console.log('[ > selectorDurations < ]', selectorDurations);
-    //     console.log('[ > currentDuration < ]', currentDuration);
-
-    //     return res;
-    //   }),
-    //   tap((currentDuration) => {
-    //     this.durationsForm.get('durations')?.setValue(currentDuration);
-    //     console.log(
-    //       '[TAP | currentDuration]',
-    //       // this.durationsForm.get('durations')?.value,
-    //       currentDuration
-    //     );
-    //   })
-    // );
   }
 
   openDialog() {
-    let currDur = this.durationsForm.get('durations')?.value;
-    // console.log('[this.openDialog]', currDur);
-
     let dialogRef = this.dialog.open(CatDurDialogComponent, {
       data: {
         plu: this.plu,
         categoryName: this.category.categoryName,
-        // currDur,
-        // selectorDurations: this.selectorDurations,
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`CatDurDialog close result`, result);
-    });
-
-    // dialogRef.close('Pizza!');
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   console.log(`CatDurDialog close result`, result);
+    // });
   }
 
   ngOnInit(): void {
     this.currentDuration$.subscribe();
-    // NOT NEEDED -> currentDuration$
-    // this.finDuration$
-    //   // this.currentDuration$
-    //   .pipe(
-    //     tap((fd) => console.log('%c[finDuration$ ON_INIT]', Colors.GOLDEN, fd))
-    //   )
-    //   .subscribe((currentDuration) => {
-    //     console.log(
-    //       '%c[SUB.ON_INIT | 1',
-    //       Colors.GOLDEN,
-    //       this.durationsForm.get('durations')?.value
-    //     );
-    //     this.durationsForm.get('durations')?.setValue(currentDuration);
-    //     console.log(
-    //       '%c[SUB.ON_INIT | 2',
-    //       Colors.GOLDEN_BLACK,
-    //       this.durationsForm.get('durations')?.value
-    //     );
-    //   });
   }
 }
