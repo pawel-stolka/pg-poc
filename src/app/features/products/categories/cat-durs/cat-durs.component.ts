@@ -5,8 +5,9 @@ import { Colors } from '@common/Colors';
 import { PluCatDur, PluCats } from '@common/models';
 import { Observable, combineLatest, map, tap } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
+import { CatDurDialogComponent } from './cat-dur-dialog/cat-dur-dialog.component';
 
-const TEN_TIMES = 'TEN_TIMES';
+export const TEN_TIMES = 'TEN_TIMES';
 @Component({
   selector: 'cat-durs',
   templateUrl: './cat-durs.component.html',
@@ -111,6 +112,21 @@ export class CatDursComponent implements OnInit {
     //   })
     // );
   }
+
+  openDialog() {
+    let currDur = this.durationsForm.get('durations')?.value;
+    // console.log('[this.openDialog]', currDur);
+
+    this.dialog.open(CatDurDialogComponent, {
+      data: {
+        plu: this.plu,
+        categoryName: this.category.categoryName,
+        // currDur,
+        // selectorDurations: this.selectorDurations,
+      },
+    });
+  }
+
   ngOnInit(): void {
     this.currentDuration$.subscribe()
     // NOT NEEDED -> currentDuration$

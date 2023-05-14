@@ -1,0 +1,16 @@
+<div *ngIf="selectorDurations$ | async as selectorDurations">
+  selectorDurations: {{ selectorDurations | json }}
+</div>
+<div *ngIf="currentDuration$ | async as currentDuration">
+  currentDuration: {{ currentDuration | json }}
+</div>
+<form [formGroup]="dropForm">
+  <mat-form-field class="full-width">
+    <mat-select placeholder="cat-dur DROP" formControlName="durations">
+      <!-- <mat-option>init</mat-option> -->
+      <mat-option *ngFor="let duration of selectorDurations$ | async" [value]="duration">
+        {{ duration }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

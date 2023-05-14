@@ -1,0 +1,8 @@
+<div class="h">
+  <p>cat-dur-dialog</p>
+  <div class="h2">data: {{ data | json }}</div>
+  <div class="h2">plu: {{ plu }}</div>
+  <div class="h2">category: {{ categoryName | json }}</div>
+</div>
+
+<cat-dur-dropdown [plu]="plu" [categoryName]="categoryName"></cat-dur-dropdown>

@@ -36,7 +36,7 @@ export class CategoryDurationsComponent implements OnInit {
     map((categories) =>
       categories?.find((x) => x.categoryName === this.category.categoryName)
     ),
-    map((category) => category?.currentDuration),
+    map((category) => category?.currentDuration)
     // tap(currentDuration => this.currentDuration = currentDuration)
     // map(categories => categories?.map(x => x.currentDuration))
     // tap((currentDuration) => {
@@ -95,24 +95,11 @@ export class CategoryDurationsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    // const toSelect = this.durations.insuranceDetails[0].insurances.map(
-    //   (i: any) => i.duration
-    // )[0];
-    let toSelect;
-    // this.currentDuration$.subscribe((x) => {
-    //   console.log(
-    //     '%c[BIGBIG_RED: [currentDuration$] in category-durations]',
-    //     Colors.BIGBIG_RED,
-    //     x
-    //   );
-    //   this.durationsForm.get('durations')?.setValue(x);
-    // });
-  }
+  ngOnInit(): void {}
 
   openDialog() {
     let currDur = this.durationsForm.get('durations')?.value;
-    console.log('[this.openDialog]', currDur);
+    // console.log('[this.openDialog]', currDur);
 
     this.dialog.open(CategoryDialogComponent, {
       data: {

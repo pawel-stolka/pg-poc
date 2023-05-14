@@ -23,6 +23,8 @@ import { Dialog2Component } from './features/home/dialog2/dialog2.component';
 import { CategoryDialogComponent } from './features/products/categories/category-dialog/category-dialog.component';
 import { DropdownComponent } from './features/products/categories/category-dialog/dropdown/dropdown.component';
 import { CatDursComponent } from './features/products/categories/cat-durs/cat-durs.component';
+import { CatDurDialogComponent } from './features/products/categories/cat-durs/cat-dur-dialog/cat-dur-dialog.component';
+import { CatDurDropdownComponent } from './features/products/categories/cat-durs/cat-dur-dropdown/cat-dur-dropdown.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -49,6 +51,8 @@ export const routes: Routes = [
     CategoryDialogComponent,
     DropdownComponent,
     CatDursComponent,
+    CatDurDialogComponent,
+    CatDurDropdownComponent,
   ],
   imports: [
     BrowserModule,
