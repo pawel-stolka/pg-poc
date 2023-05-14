@@ -1,8 +1,11 @@
 <ng-container *ngIf="productDurations$ | async as productDurations">
   <ng-container *ngIf="durationState$ | async"> </ng-container>
   <form [formGroup]="dropForm">
-    <mat-form-field class="full-width">
-      <mat-select placeholder="cat-dur DROP" formControlName="durations">
+    <mat-form-field>
+      <mat-select
+        placeholder="category-durations-dropdown"
+        formControlName="durations"
+      >
         <mat-option
           *ngFor="let duration of productDurations"
           [value]="duration"

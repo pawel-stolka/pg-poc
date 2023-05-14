@@ -22,9 +22,7 @@ export class ProductService {
     this._productsStateSubj.asObservable();
 
   constructor() {
-    this.products$ = this.getProducts$().pipe(
-      // tap((p) => console.log('products$ | SERVICE', p))
-    );
+    this.products$ = this.getProducts$().pipe();
   }
 
   setProductDuration(pluCatDur: PluCatDur) {
@@ -76,15 +74,14 @@ export class ProductService {
           plu: pluCat.plu,
           category,
         };
-        // console.log('[setInitialDurations]', pluCatDur);
-
         this.changeState(pluCatDur);
       });
     });
   }
 
   changeState(change: PluCatDur) {
-    console.log('[changeState]', change);
+    // console.log('this.changeState');
+
     let pluInState = !!this.productState.find(({ plu }) => plu === change.plu);
 
     if (!pluInState) {
@@ -133,7 +130,6 @@ export class ProductService {
   }
 
   private changeDuration(change: PluCatDur) {
-    // console.log('[CHANGE changeDuration]', change);
     this.productState = this.productState.map((pluCats: PluCats) => {
       if (pluCats.plu !== change.plu) {
         return pluCats;
@@ -153,7 +149,7 @@ export class ProductService {
         }),
       };
     });
-    console.log('[CHANGE changeDuration => ]', this.productState);
+    // console.log('[changeDuration]')//, this.productState);
     this._productsStateSubj.next(this.productState);
   }
 }

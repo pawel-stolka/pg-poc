@@ -15,10 +15,9 @@ import { CategoriesComponent } from './features/products/categories/categories.c
 import { CategoryDetailComponent } from './features/products/categories/category-detail/category-detail.component';
 import { BenefitsComponent } from './features/products/benefits/benefits.component';
 import { CategoryPaymentsComponent } from './features/products/categories/category-payments/category-payments.component';
-import { DropdownComponent } from './features/products/categories/category-dialog/dropdown/dropdown.component';
-import { CatDursComponent } from './features/products/categories/cat-durs/cat-durs.component';
-import { CatDurDialogComponent } from './features/products/categories/cat-durs/cat-dur-dialog/cat-dur-dialog.component';
-import { CatDurDropdownComponent } from './features/products/categories/cat-durs/cat-dur-dropdown/cat-dur-dropdown.component';
+import { CategoryDurationsComponent } from './features/products/categories/category-durations/category-durations.component';
+import { CategoryDurationsDialogComponent } from './features/products/categories/category-durations/category-durations-dialog/category-durations-dialog.component';
+import { CategoryDurationsDropdownComponent } from './features/products/categories/category-durations/category-durations-dropdown/category-durations-dropdown.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -39,10 +38,9 @@ export const routes: Routes = [
     CategoryDetailComponent,
     CategoryPaymentsComponent,
     StateComponent,
-    DropdownComponent,
-    CatDursComponent,
-    CatDurDialogComponent,
-    CatDurDropdownComponent,
+    CategoryDurationsComponent,
+    CategoryDurationsDialogComponent,
+    CategoryDurationsDropdownComponent,
   ],
   imports: [
     BrowserModule,

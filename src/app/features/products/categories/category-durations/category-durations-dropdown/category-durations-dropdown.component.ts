@@ -1,19 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PluCatDur } from '@common/models';
 import { map, tap } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
-// TODO: TEN_TIMES
-import { TEN_TIMES } from '../cat-durs.component';
-import { PluCatDur } from '@common/models';
+import { TEN_TIMES } from '../category-durations.component';
 
 @Component({
-  selector: 'cat-dur-dropdown',
-  templateUrl: './cat-dur-dropdown.component.html',
-  styleUrls: ['./cat-dur-dropdown.component.scss'],
+  selector: 'category-durations-dropdown',
+  templateUrl: './category-durations-dropdown.component.html',
+  styleUrls: ['./category-durations-dropdown.component.scss'],
 })
-export class CatDurDropdownComponent {
-  @Input() plu: string = 'init-plu';
-  @Input() categoryName: any;
+export class CategoryDurationsDropdownComponent {
+  @Input() plu: string = '';
+  @Input() categoryName: string = '';
 
   dropForm: FormGroup;
 
