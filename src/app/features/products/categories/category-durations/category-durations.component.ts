@@ -5,7 +5,6 @@ import { Colors } from '@common/Colors';
 import { PluCatDur } from '@common/models';
 import { Observable, map, noop, tap } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
-import { CategoryDialogComponent } from '../category-dialog/category-dialog.component';
 
 const typeDetailsIndex = 0;
 
@@ -97,17 +96,17 @@ export class CategoryDurationsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openDialog() {
-    let currDur = this.durationsForm.get('durations')?.value;
-    // console.log('[this.openDialog]', currDur);
+  // openDialog() {
+  //   let currDur = this.durationsForm.get('durations')?.value;
+  //   // console.log('[this.openDialog]', currDur);
 
-    this.dialog.open(CategoryDialogComponent, {
-      data: {
-        plu: this.plu,
-        categoryName: this.category.categoryName,
-        currDur,
-        selectorDurations: this.selectorDurations,
-      },
-    });
-  }
+  //   // this.dialog.open(CategoryDialogComponent, {
+  //   //   data: {
+  //   //     plu: this.plu,
+  //   //     categoryName: this.category.categoryName,
+  //   //     currDur,
+  //   //     selectorDurations: this.selectorDurations,
+  //   //   },
+  //   // });
+  // }
 }

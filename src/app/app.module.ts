@@ -19,7 +19,7 @@ import { CategoryDurationsComponent } from './features/products/categories/categ
 import { CategoryPaymentsComponent } from './features/products/categories/category-payments/category-payments.component';
 import { StateComponent } from './common/state/state.component';
 import { Dialog2Component } from './features/home/dialog2/dialog2.component';
-import { CategoryDialogComponent } from './features/products/categories/category-dialog/category-dialog.component';
+// import { CategoryDialogComponent } from './features/products/categories/category-dialog/category-dialog.component';
 import { DropdownComponent } from './features/products/categories/category-dialog/dropdown/dropdown.component';
 import { CatDursComponent } from './features/products/categories/cat-durs/cat-durs.component';
 import { CatDurDialogComponent } from './features/products/categories/cat-durs/cat-dur-dialog/cat-dur-dialog.component';
@@ -46,7 +46,7 @@ export const routes: Routes = [
     CategoryPaymentsComponent,
     StateComponent,
     Dialog2Component,
-    CategoryDialogComponent,
+    // CategoryDialogComponent,
     DropdownComponent,
     CatDursComponent,
     CatDurDialogComponent,

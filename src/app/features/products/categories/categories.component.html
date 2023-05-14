@@ -1,39 +1,11 @@
-<div class="container">
-  <div class="card" *ngFor="let category of categories; index as id">
+<ng-container *ngIf="currentCategories$ | async as currentCategories">
+  <div class="card" *ngFor="let category of currentCategories">
     <div class="title">{{ category.categoryName }}</div>
     <div class="content">
-      <category-detail
-        *ngFor="let detail of category.insuranceDetails"
-        [detail]="detail"
-      ></category-detail>
-
+      <div class="h">//TODO: category-detail</div>
       <div class="divider"></div>
-
-      <!-- TODO: inside currentDuration$ -->
-      <ng-container *ngIf="currentCats$ | async as currentCats">
-        <!-- <div>categories.currentCats:
-          <pre class="h">{{ currentCats | json }}</pre>
-        </div>
-        <div>categories.category
-          <div class="h3">category: {{ category | json }}</div>
-        </div> -->
-        <cat-durs
-        [plu]="plu"
-        [category]="category"
-        ></cat-durs>
-        <!-- [currentCategories]="currentCats"
-        [currentDurations]="currentDurations" -->
-      </ng-container>
-
-      <ng-container *ngIf="categories">
-        <!-- <div>cats: <pre>{{ categories | json }}</pre></div> -->
-        <!-- <category-durations
-          [plu]="plu"
-          [category]="category"
-        ></category-durations> -->
-      </ng-container>
-
-      <ng-container *ngIf="payments$ | async as payments"> </ng-container>
+      <cat-durs [plu]="plu" [category]="category"></cat-durs>
+      <div class="h">//TODO: payments</div>
     </div>
   </div>
-</div>
+</ng-container>

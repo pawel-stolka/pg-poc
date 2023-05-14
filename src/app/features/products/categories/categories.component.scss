@@ -1,4 +1,8 @@
-.container {
+// .container {
+//   display: flex;
+//   justify-content: space-around;
+// }
+:host {
   display: flex;
   justify-content: space-around;
 }
