@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent {
-  routes: string[] = ['home', 'products', 'details'];
+  routes: string[] = ['home', 'products']//, 'details'];
 }

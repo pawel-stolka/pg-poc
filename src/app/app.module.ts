@@ -1,25 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material/material.module';
 
 import { AppComponent } from './app.component';
-import { WidgetActions } from './widget-actions';
-import { WidgetState } from './widget-state';
-import { HomeComponent } from './features/home/home.component';
-import { ProductDetailsComponent } from './features/details/details.component';
 import { NavComponent } from './features/nav/nav.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
-import { ProductsComponent } from './features/products/products.component';
-import { CategoriesComponent } from './features/products/categories/categories.component';
-import { BenefitsComponent } from './features/products/benefits/benefits.component';
-import { CategoryDetailComponent } from './features/products/categories/category-detail/category-detail.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CategoryDurationsComponent } from './features/products/categories/category-durations/category-durations.component';
-import { CategoryPaymentsComponent } from './features/products/categories/category-payments/category-payments.component';
+import { HomeComponent } from './features/home/home.component';
 import { StateComponent } from './common/state/state.component';
-import { Dialog2Component } from './features/home/dialog2/dialog2.component';
-// import { CategoryDialogComponent } from './features/products/categories/category-dialog/category-dialog.component';
+import { ProductsComponent } from './features/products/products.component';
+import { ProductDetailsComponent } from './features/details/details.component';
+import { CategoriesComponent } from './features/products/categories/categories.component';
+import { CategoryDetailComponent } from './features/products/categories/category-detail/category-detail.component';
+import { BenefitsComponent } from './features/products/benefits/benefits.component';
+import { CategoryPaymentsComponent } from './features/products/categories/category-payments/category-payments.component';
 import { DropdownComponent } from './features/products/categories/category-dialog/dropdown/dropdown.component';
 import { CatDursComponent } from './features/products/categories/cat-durs/cat-durs.component';
 import { CatDurDialogComponent } from './features/products/categories/cat-durs/cat-dur-dialog/cat-dur-dialog.component';
@@ -42,11 +37,8 @@ export const routes: Routes = [
     CategoriesComponent,
     BenefitsComponent,
     CategoryDetailComponent,
-    CategoryDurationsComponent,
     CategoryPaymentsComponent,
     StateComponent,
-    Dialog2Component,
-    // CategoryDialogComponent,
     DropdownComponent,
     CatDursComponent,
     CatDurDialogComponent,
@@ -59,7 +51,6 @@ export const routes: Routes = [
     MaterialModule,
     ReactiveFormsModule,
   ],
-  providers: [WidgetState, WidgetActions],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
