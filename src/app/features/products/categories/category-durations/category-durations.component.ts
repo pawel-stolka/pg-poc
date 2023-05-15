@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PluCatDur } from '@common/models';
@@ -12,6 +12,7 @@ export const TEN_TIMES = 'TEN_TIMES';
   selector: 'category-durations',
   templateUrl: './category-durations.component.html',
   styleUrls: ['./category-durations.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryDurationsComponent implements OnDestroy {
   @Input() plu: string = '';

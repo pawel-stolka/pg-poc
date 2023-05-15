@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PluCatDur } from '@common/models';
 import { Subject, map, takeUntil, tap } from 'rxjs';
@@ -9,6 +9,7 @@ import { TEN_TIMES } from '../category-durations.component';
   selector: 'category-durations-dropdown',
   templateUrl: './category-durations-dropdown.component.html',
   styleUrls: ['./category-durations-dropdown.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoryDurationsDropdownComponent implements OnDestroy {
   @Input() plu: string = '';

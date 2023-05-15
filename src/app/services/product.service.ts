@@ -114,8 +114,10 @@ export class ProductService {
     );
 
     if (stateForPlu_hasCategory) {
+      // debugger;
       this.changeDuration(change);
     } else {
+      // debugger;
       let pluUpdate: PluCats = {
         plu: change.plu,
         categories: [...stateForPluCategories, change.category],
@@ -128,6 +130,8 @@ export class ProductService {
   }
 
   private changeDuration(change: PluCatDur) {
+    console.log('changeDuration')//, change);
+debugger;
     this.productState = this.productState.map((pluCats: PluCats) => {
       if (pluCats.plu !== change.plu) {
         return pluCats;

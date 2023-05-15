@@ -1,11 +1,6 @@
 <ng-container *ngIf="productDurations$ | async as productDurations">
   <ng-container *ngIf="categoryState$ | async as categoryState">
-    <div class="help">
-      categoryState:
-      <pre>{{ categoryState | json }}</pre>
-    </div>
-    <ng-container *ngIf="durationState$ | async as durationState">
-    </ng-container>
+    <ng-container *ngIf="durationState$ | async"> </ng-container>
     <form [formGroup]="durationsForm">
       <mat-form-field>
         <mat-select

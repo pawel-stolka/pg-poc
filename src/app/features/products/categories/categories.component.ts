@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Category } from '@common/models';
 import { Observable, map } from 'rxjs';
@@ -8,6 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
   selector: 'categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesComponent {
   @Input() plu: string = 'cat-plu';
