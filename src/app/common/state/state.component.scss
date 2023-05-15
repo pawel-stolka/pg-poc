@@ -1,8 +1,6 @@
 .container {
-  // border: 5px solid magenta;
   margin: 5px;
   padding: 5px;
-  // width: 100%;
 
   .product {
     border: 1px solid dodgerblue;
@@ -22,16 +20,12 @@
     }
 
     .categories {
-      // border: 1px dotted dodgerblue;
       display: flex;
       justify-content: space-around;
       flex-direction: row;
       margin: 10px;
-      // flex-wrap: wrap;
-      // width: 100%;
 
       .category {
-        // margin: 5px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -48,12 +42,8 @@
         }
 
         .duration {
-          // border: 1px dotted dodgerblue;
           padding: 10px;
 
-          .dheader {
-
-          }
           .amount {
             display: flex;
             justify-content: center;

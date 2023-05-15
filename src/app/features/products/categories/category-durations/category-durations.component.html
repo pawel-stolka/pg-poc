@@ -1,14 +1,26 @@
-<div *ngIf="durations">
-  <form [formGroup]="durationsForm">
-    <mat-form-field class="full-width">
-      <mat-select placeholder="durations" formControlName="durations">
-        <mat-option
-          *ngFor="let duration of durations.insuranceDetails[0].insurances"
-          [value]="duration.duration"
+<ng-container *ngIf="productDurations$ | async as productDurations">
+  <ng-container *ngIf="categoryState$ | async as categoryState">
+    <ng-container *ngIf="durationState$ | async as durationState">
+    </ng-container>
+    <form [formGroup]="durationsForm">
+      <mat-form-field>
+        <mat-select
+          placeholder="category-durations"
+          formControlName="durations"
+          [value]="categoryState"
         >
-          {{ duration.duration }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </form>
-</div>
+          <mat-option
+            *ngFor="let duration of productDurations"
+            [value]="duration"
+          >
+            {{ duration }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+    <div class="divider"></div>
+
+    <button mat-raised-button (click)="openDialog()">dialog</button>
+  </ng-container>
+</ng-container>

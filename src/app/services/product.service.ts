@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Colors } from '@common/Colors';
 import { mockProducts } from '@common/_mocks/mockProducts';
 import { CatDur, PluCatDur, PluCats, Product } from '@common/models';
 import { BehaviorSubject, map, Observable, of, shareReplay, tap } from 'rxjs';
 
 const products: Product[] = mockProducts;
+const DEFAULT_TYPE_ID = 0;
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class ProductService {
     this._productsStateSubj.asObservable();
 
   constructor() {
-    this.products$ = this.getProducts$();
+    this.products$ = this.getProducts$().pipe();
   }
 
   setProductDuration(pluCatDur: PluCatDur) {
@@ -30,21 +30,22 @@ export class ProductService {
   }
 
   getProducts$(): Observable<Product[]> {
-    let DEFAULT_TYPE_ID = 0;
     return of(products).pipe(
       map((products) =>
         products.map((p) => ({
           ...p,
           categories: p.categories.map((c) => ({
             ...c,
-            insuranceDetails: c.insuranceDetails.map((det) => ({
-              type: det.insurances.map((_) => det.type)[DEFAULT_TYPE_ID],
-              insurances: det.insurances,
-            })),
+            insuranceDetails: c.insuranceDetails.map(
+              ({ insurances, type }) => ({
+                type: insurances.map((_) => type)[DEFAULT_TYPE_ID],
+                insurances: insurances,
+              })
+            ),
           })),
         }))
       ),
-      shareReplay(),
+
       tap((products) => {
         let pluCats: PluCats[] = products.map(({ plu, categories }) => {
           let catDurs: CatDur[] | any[] = categories.map(
@@ -52,7 +53,7 @@ export class ProductService {
               categoryName,
               currentDuration: insuranceDetails.map(
                 (det) => det.insurances.map((ins) => ins.duration)[0]
-              ),
+              )[0],
             })
           );
           return {
@@ -61,7 +62,8 @@ export class ProductService {
           };
         });
         this.setInitialDurations(pluCats);
-      })
+      }),
+      shareReplay()
     );
   }
 
@@ -78,6 +80,8 @@ export class ProductService {
   }
 
   changeState(change: PluCatDur) {
+    // console.log('this.changeState');
+
     let pluInState = !!this.productState.find(({ plu }) => plu === change.plu);
 
     if (!pluInState) {
@@ -118,6 +122,7 @@ export class ProductService {
       };
       let otherPlus = this.productState.filter(({ plu }) => plu !== change.plu);
       this.productState = [...otherPlus, pluUpdate];
+
       this._productsStateSubj.next(this.productState);
     }
   }
@@ -142,7 +147,7 @@ export class ProductService {
         }),
       };
     });
-
+    // console.log('[changeDuration]')//, this.productState);
     this._productsStateSubj.next(this.productState);
   }
 }

@@ -1,11 +1,6 @@
-.container {
+:host {
   display: flex;
   justify-content: space-around;
-}
-
-.select0 {
-  display: none;
-  // visibility: hidden;
 }
 
 .card {
@@ -26,13 +21,9 @@
 
     .select {
       border: 5px dotted magenta;
-
     }
-
   }
 }
-
-
 
 .mat-card {
   margin: 5px;
@@ -41,10 +32,8 @@
   min-width: 25vw;
 
   .mat-card-title {
-    // border: 2px dotted dodgerblue;
     border-radius: 5px;
     background-color: dodgerblue;
     padding: 5px;
-    // margin: 0 0;
   }
 }

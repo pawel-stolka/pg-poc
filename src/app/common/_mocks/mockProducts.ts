@@ -35,9 +35,9 @@ const _categories2: Category[] = [
       {
         type: InsuranceType.TEN_TIMES,
         insurances: [
-          { insuranceId: '#3.0', price: 901, duration: '3.10' },
-          { insuranceId: '#3.1', price: 12, duration: '3.11' },
-          { insuranceId: '#3.2', price: 850, duration: '3.12' },
+          { insuranceId: '#2.30', price: 901, duration: '2.30' },
+          { insuranceId: '#2.31', price: 12, duration: '2.31' },
+          { insuranceId: '#2.32', price: 850, duration: '2.32' },
         ],
       },
     ],
@@ -48,8 +48,8 @@ const _categories2: Category[] = [
       {
         type: InsuranceType.TEN_TIMES,
         insurances: [
-          { insuranceId: '#4.0', price: 901, duration: '4.10' },
-          { insuranceId: '#4.1', price: 901, duration: '4.11' },
+          { insuranceId: '#2.40', price: 901, duration: '2.40' },
+          { insuranceId: '#2.41', price: 901, duration: '2.41' },
         ],
       },
     ],
@@ -60,10 +60,10 @@ const _categories2: Category[] = [
       {
         type: InsuranceType.TEN_TIMES,
         insurances: [
-          { insuranceId: '#5.0', price: 153, duration: '5.10' },
-          { insuranceId: '#5.1', price: 247, duration: '5.11' },
-          { insuranceId: '#5.2', price: 932, duration: '5.12' },
-          { insuranceId: '#5.3', price: 425, duration: '5.13' },
+          { insuranceId: '#2.50', price: 153, duration: '2.50' },
+          { insuranceId: '#2.51', price: 247, duration: '2.51' },
+          { insuranceId: '#2.52', price: 932, duration: '2.52' },
+          { insuranceId: '#2.53', price: 425, duration: '2.53' },
 
         ],
       },
