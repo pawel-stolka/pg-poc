@@ -1,8 +1,22 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PluCatDur } from '@common/models';
-import { Observable, Subject, map, takeUntil, tap } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  distinctUntilChanged,
+  distinctUntilKeyChanged,
+  map,
+  skip,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { CategoryDurationsDialogComponent } from './category-durations-dialog/category-durations-dialog.component';
 
@@ -12,7 +26,7 @@ export const TEN_TIMES = 'TEN_TIMES';
   selector: 'category-durations',
   templateUrl: './category-durations.component.html',
   styleUrls: ['./category-durations.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryDurationsComponent implements OnDestroy {
   @Input() plu: string = '';
@@ -56,23 +70,11 @@ export class CategoryDurationsComponent implements OnDestroy {
       ),
       map((category) => category?.currentDuration),
       tap((currentDuration) => {
+        console.log('set value');
+
         this.durationsForm.get('durations')?.setValue(currentDuration);
       })
     );
-
-    this.durationsForm.valueChanges
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((dropChange) => {
-        let pluCatDur: PluCatDur = {
-          plu: this.plu,
-          category: {
-            categoryName: this.category.categoryName,
-            currentDuration: dropChange.durations,
-          },
-        };
-
-        this.productService.setProductDuration(pluCatDur);
-      });
 
     this.categoryState$ = this.productService.productsState$.pipe(
       map((state) => state.find(({ plu }) => this.plu === plu)?.categories),
@@ -86,6 +88,26 @@ export class CategoryDurationsComponent implements OnDestroy {
       //   this.durationsForm.get('durations')?.setValue(currentDuration);
       // })
     );
+
+    this.durationsForm.valueChanges
+      .pipe(
+        skip(1),
+        distinctUntilKeyChanged('durations'),
+        // distinctUntilChanged((prev, curr) => prev.durations === curr.durations),
+        tap((x) => console.log('tap', x)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((dropChange) => {
+        let pluCatDur: PluCatDur = {
+          plu: this.plu,
+          category: {
+            categoryName: this.category.categoryName,
+            currentDuration: dropChange.durations,
+          },
+        };
+
+        this.productService.setProductDuration(pluCatDur);
+      });
   }
 
   openDialog() {

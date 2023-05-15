@@ -131,7 +131,7 @@ export class ProductService {
 
   private changeDuration(change: PluCatDur) {
     console.log('changeDuration')//, change);
-debugger;
+// debugger;
     this.productState = this.productState.map((pluCats: PluCats) => {
       if (pluCats.plu !== change.plu) {
         return pluCats;
