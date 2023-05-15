@@ -1,5 +1,9 @@
 <ng-container *ngIf="productDurations$ | async as productDurations">
   <ng-container *ngIf="categoryState$ | async as categoryState">
+    <div class="help">
+      categoryState:
+      <pre>{{ categoryState | json }}</pre>
+    </div>
     <ng-container *ngIf="durationState$ | async as durationState">
     </ng-container>
     <form [formGroup]="durationsForm">

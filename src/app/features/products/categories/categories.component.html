@@ -1,8 +1,6 @@
 <ng-container *ngIf="stateCategories$ | async as stateCategories">
   <div class="card" *ngFor="let category of stateCategories">
-    <div class="help">
-      {{ category | json }}
-    </div>
+
     <div class="title">{{ category.categoryName }}</div>
     <div class="content">
       <div class="h">//TODO: category-detail</div>

@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Category } from '@common/models';
-import { Observable, delay, map, of } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -18,12 +17,11 @@ export class CategoriesComponent {
     products: [null, Validators.required],
   });
 
-  stateCategories$ = this.productService.productsState$.pipe(
-    map((state) => state.find(({ plu }) => this.plu === plu)?.categories)
-  );
+  stateCategories$: Observable<any>;
 
-  constructor(
-    private fb: FormBuilder,
-    private productService: ProductService
-  ) {}
+  constructor(private fb: FormBuilder, private productService: ProductService) {
+    this.stateCategories$ = this.productService.productsState$.pipe(
+      map((state) => state.find(({ plu }) => this.plu === plu)?.categories)
+    );
+  }
 }

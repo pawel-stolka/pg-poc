@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PluCatDur } from '@common/models';
-import { map, tap } from 'rxjs';
+import { Subject, map, takeUntil, tap } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { TEN_TIMES } from '../category-durations.component';
 
@@ -10,11 +10,15 @@ import { TEN_TIMES } from '../category-durations.component';
   templateUrl: './category-durations-dropdown.component.html',
   styleUrls: ['./category-durations-dropdown.component.scss'],
 })
-export class CategoryDurationsDropdownComponent {
+export class CategoryDurationsDropdownComponent implements OnDestroy {
   @Input() plu: string = '';
   @Input() categoryName: string = '';
 
-  dropForm: FormGroup;
+  dropForm: FormGroup = this.fb.group({
+    durations: [null, Validators.required],
+  });
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   productDurations$ = this.productService.products$.pipe(
     map((products) => products.find(({ plu }) => this.plu === plu)?.categories),
@@ -42,19 +46,22 @@ export class CategoryDurationsDropdownComponent {
   );
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
-    this.dropForm = this.fb.group({
-      durations: [null, Validators.required],
-    });
+    this.dropForm.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((change) => {
+        let pluCatDur: PluCatDur = {
+          plu: this.plu,
+          category: {
+            categoryName: this.categoryName,
+            currentDuration: change.durations,
+          },
+        };
+        this.productService.setProductDuration(pluCatDur);
+      });
+  }
 
-    this.dropForm.valueChanges.subscribe((change) => {
-      let pluCatDur: PluCatDur = {
-        plu: this.plu,
-        category: {
-          categoryName: this.categoryName,
-          currentDuration: change.durations,
-        },
-      };
-      this.productService.setProductDuration(pluCatDur);
-    });
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

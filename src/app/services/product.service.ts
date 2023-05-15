@@ -19,7 +19,7 @@ export class ProductService {
   );
 
   productsState$: Observable<PluCats[]> =
-    this._productsStateSubj.asObservable();
+    this._productsStateSubj.asObservable()
 
   constructor() {
     this.products$ = this.getProducts$().pipe();

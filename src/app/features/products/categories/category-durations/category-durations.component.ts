@@ -1,8 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PluCatDur } from '@common/models';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, Subject, map, takeUntil, tap } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { CategoryDurationsDialogComponent } from './category-durations-dialog/category-durations-dialog.component';
 
@@ -13,13 +13,18 @@ export const TEN_TIMES = 'TEN_TIMES';
   templateUrl: './category-durations.component.html',
   styleUrls: ['./category-durations.component.scss'],
 })
-export class CategoryDurationsComponent {
+export class CategoryDurationsComponent implements OnDestroy {
   @Input() plu: string = '';
   @Input() category: any;
 
   durationsForm: FormGroup = this.fb.group({
     durations: [null, Validators.required],
   });
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
+  durationState$: Observable<string | undefined>;
+  categoryState$: Observable<any>;
 
   productDurations$ = this.productService.products$.pipe(
     map((products) => products.find(({ plu }) => this.plu === plu)?.categories),
@@ -35,9 +40,6 @@ export class CategoryDurationsComponent {
     ),
     map((insurances) => insurances?.map(({ duration }) => duration))
   );
-
-  durationState$: Observable<string | undefined>;
-  categoryState$: Observable<any>;
 
   constructor(
     private fb: FormBuilder,
@@ -57,17 +59,19 @@ export class CategoryDurationsComponent {
       })
     );
 
-    this.durationsForm.valueChanges.subscribe((dropChange) => {
-      let pluCatDur: PluCatDur = {
-        plu: this.plu,
-        category: {
-          categoryName: this.category.categoryName,
-          currentDuration: dropChange.durations,
-        },
-      };
+    this.durationsForm.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((dropChange) => {
+        let pluCatDur: PluCatDur = {
+          plu: this.plu,
+          category: {
+            categoryName: this.category.categoryName,
+            currentDuration: dropChange.durations,
+          },
+        };
 
-      this.productService.setProductDuration(pluCatDur);
-    });
+        this.productService.setProductDuration(pluCatDur);
+      });
 
     this.categoryState$ = this.productService.productsState$.pipe(
       map((state) => state.find(({ plu }) => this.plu === plu)?.categories),
@@ -94,5 +98,10 @@ export class CategoryDurationsComponent {
     // dialogRef.afterClosed().subscribe((result) => {
     //   console.log(`CatDurDialog close result`, result);
     // });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
